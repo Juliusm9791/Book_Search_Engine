@@ -21,7 +21,7 @@ query user($username: String!) {
 
 
 export const QUERY_ME = gql`
-  queryme {
+query user{
     me {
       _id
       username
