@@ -12,13 +12,13 @@ const resolvers = {
     },
     me: async (parent, args, context) => {
       if (context.user) {
-        return await User.findOne({ _id: context.user._id }).populate('savedBooks');
+        return await User.findOne({ _id: context.user._id });
       }
       throw new AuthenticationError('You need to be logged in!');
     },
 
   },
-
+  
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
@@ -54,27 +54,19 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-
+    
     saveBook: async (parent, args, context) => {
-      console.log(args);
       if (context.user) {
-      return await User.findOneAndUpdate(
-        { _id: context._id },
-        { $addToSet: { savedBooks: args } },
-        { new: true }
-      );
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: {...args} } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
       }
-      throw new AuthenticationError('You need to be logged in!');
+      throw new AuthenticationError("You need to be logged in!");
     },
-
-
-
-
-
   },
 };
 
 module.exports = resolvers;
-
-
-// bookId: args.bookId, description: args.description, image: args.image, link: args.link, title: args.title

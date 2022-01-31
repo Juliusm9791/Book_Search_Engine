@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import gql from "graphql-tag";
 
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
@@ -13,38 +13,21 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
+  mutation addUser($username: String!, $password: String!, $email: String!) {
+    addUser(username: $username, password: $password, email: $email) {
       token
       user {
-        _id
         username
-      }
-    }
-  }
-`;
-
-export const SAVE_BOOK = gql`
-mutation saveBook($authors: [String], $bookId: String, $description: String, $image: String, $link: String, $title: String){
-    saveBook(authors: $authors, bookId: $bookId, description: $description, image: $image, link: $link, title: $title){
-      username
-      _id
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        image
-        link
-        title
-        description
+        _id
+        email
       }
     }
   }
 `;
 
 export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: String!) {
-    removeBook(bookId: $bookId) {
+  mutation deleteBook($bookId: String!) {
+    deleteBook(bookId: $bookId) {
       _id
       username
       bookCount
@@ -59,3 +42,22 @@ export const REMOVE_BOOK = gql`
     }
   }
 `;
+
+export const SAVE_BOOK = gql`
+  mutation saveBook($authors: [String], $title: String, $description: String, $bookId: String, $image: String, $link: String) {
+    saveBook(authors: $authors, title: $title, description: $description, bookId: $bookId, image: $image, link: $link) {
+      username
+      _id
+      bookCount
+      savedBooks {
+        bookId
+        authors
+        image
+        link
+        title
+        description
+      }
+    }
+  }
+`;
+
