@@ -27,7 +27,7 @@ const SavedBooks = () => {
         variables: { bookId: bookId },
       });
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error('something went wrong!');
       }
       removeBookId(bookId);
