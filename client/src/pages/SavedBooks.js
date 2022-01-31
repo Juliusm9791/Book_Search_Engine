@@ -8,7 +8,7 @@ import { QUERY_ME } from '../utils/queries';
 import { REMOVE_BOOK } from "../utils/mutations";
 // import { deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId, saveBookIds } from '../utils/localStorage';
+import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
   // const { username: userParam } = useParams();
@@ -16,7 +16,6 @@ const SavedBooks = () => {
   const userData = data?.me || [];
   // const [userData, setUserData] = useState({});
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
-
 
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -29,22 +28,18 @@ const SavedBooks = () => {
       });
 
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error('something went wrong!');
       }
       removeBookId(bookId);
     } catch (err) {
       console.error(error);
     }
   };
-
-
-  const savedBookIds = userData.savedBooks.map((book) => book.bookId);
-  saveBookIds(savedBookIds);
-
+  
   // if data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
-  }
+  }    
 
   return (
     <>
@@ -60,7 +55,7 @@ const SavedBooks = () => {
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
-          {userData.map((book) => {
+          {userData.savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
