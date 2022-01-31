@@ -62,11 +62,8 @@ A user can view their saved books on a separate page, as shown in the following 
 
   ## Questions
 
-  To reach us with additional questions:
+  To reach me with additional questions
 
-  GitHub: [Juliusm9791](https://github.com/Juliusm9791)  Email: juliusm9791@gmail.com
+  GitHub: [Juliusm9791](https://github.com/Juliusm9791)
 
-  GitHub: [Jax-o](https://github.com/Jax-o)  Email: jjmlmhc.09@gmail.com
-
-   GitHub: [Amit-Ranjan22](https://github.com/Amit-Ranjan22)  Email: amitabh.march22@gmail.com
-
+  Email: juliusm9791@gmail.com
